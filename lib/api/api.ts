@@ -23,7 +23,7 @@ if (!NOTEHUB_TOKEN) {
 
 //AXIOS DEFAULTS
 const axiosInstance = axios.create({
-  baseURL: 'https://notehub-api.goit.study', //https://notehub-api.goit.study
+  baseURL: 'https://notehub-public.goit.study/api', //https://notehub-api.goit.study
   headers: {
     Authorization: `Bearer ${NOTEHUB_TOKEN}`,
   },
