@@ -56,7 +56,7 @@
 import css from './NotePreview.module.css';
 import { useParams, useRouter } from 'next/navigation'; // useRouter вже імпортований
 import { useQuery } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api';
+import { fetchNoteById } from '@/lib/api/api';
 import Modal from '@/components/Modal/Modal';
 import { useCallback } from 'react';
 
