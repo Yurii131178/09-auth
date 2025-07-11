@@ -68,7 +68,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
