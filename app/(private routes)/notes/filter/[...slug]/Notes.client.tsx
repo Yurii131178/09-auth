@@ -5,10 +5,10 @@ import css from './NotesPage.module.css';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import NoteList from '@/components/NoteList/NoteList';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/api';
 import Pagination from '@/components/Pagination/Pagination';
 import { useDebounce } from 'use-debounce';
-import type { FetchNotesResponse } from '@/lib/api';
+import type { FetchNotesResponse } from '@/lib/api/api';
 import { Tag } from '@/types/note';
 import { useState } from 'react';
 
