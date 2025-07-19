@@ -29,7 +29,7 @@ export async function generateMetadata({
   } else {
     tag = rawTag as Tag;
   }
-  const title = tag === 'All' ? 'All Notes' : `Notes tagged "${tag}"`;
+  const title = tag === 'All' ? 'All Notes' : `"${tag}" notes`;
   const description =
     tag === 'All'
       ? 'View all notes sorted by creation date.'
