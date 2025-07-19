@@ -1,51 +1,53 @@
-import type { Metadata } from 'next';
-import { fetchNoteById } from '@/lib/api/clientApi';
 import NoteDetailsClient from './NoteDetails.client';
+
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+import { Metadata } from 'next';
+import { fetchNoteByIdServer } from '@/lib/api/serverApi';
 
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({
+const url = 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg';
+
+export const generateMetadata = async ({
   params,
-}: NoteDetailsProps): Promise<Metadata> {
+}: NoteDetailsProps): Promise<Metadata> => {
   const { id } = await params;
-  const note = await fetchNoteById(id);
-
-  const title = note?.title || 'Note not found';
-
-  const description = note
-    ? `${note.content.slice(0, 100)}${note.content.length > 100 ? '...' : ''}`
-    : 'The requested note was not found in NoteHub. Explore other notes or create a new one.';
+  const { title, content } = await fetchNoteByIdServer(id);
+  const snippet = content.length > 30 ? content.slice(0, 30) + '...' : content;
 
   return {
-    title,
-    description,
+    title: title || 'Note details',
+    description: snippet,
+
     openGraph: {
-      title,
-      description,
-      url: `${baseUrl}/notes/${id}`,
+      title: title || 'Note details',
+      description: snippet,
+      url: `#/filter/${id}`, // тут мій vercel
+      siteName: 'NoteHub',
       images: [
         {
-          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-          // NEW: Змінюємо alt-текст для випадку відсутності нотатки
-          alt: note
-            ? 'NoteHub - Note Management App Logo'
-            : 'NoteHub - Note Not Found',
+          url,
           width: 1200,
           height: 630,
+          alt: 'NoteHub App',
         },
       ],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title || 'Note details',
+      description: snippet,
+      images: [url],
     },
   };
-}
+};
 
 const NoteDetails = async ({ params }: NoteDetailsProps) => {
   const { id } = await params;
@@ -53,7 +55,7 @@ const NoteDetails = async ({ params }: NoteDetailsProps) => {
 
   await queryClient.prefetchQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(id),
+    queryFn: () => fetchNoteByIdServer(id),
   });
 
   return (
