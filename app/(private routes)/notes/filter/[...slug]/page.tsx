@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Tag } from '@/types/note'; // Оригінальний тип Tag для нотаток
-import { fetchNotes } from '@/lib/api/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 import NotesClient from './Notes.client';
 
 type FilterTag = Tag | 'All';

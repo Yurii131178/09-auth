@@ -1,3 +1,4 @@
+// - для створення одного спільного екземпляра axios, з налаштуванням withCredentials: true для підтримки cookies;
 // lib/api/api.ts
 
 import axios from 'axios';

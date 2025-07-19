@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { fetchNoteById } from '@/lib/api/api';
+import { fetchNoteById } from '@/lib/api/clientApi';
 import NoteDetailsClient from './NoteDetails.client';
 import {
   dehydrate,
@@ -7,7 +7,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
@@ -17,7 +17,7 @@ export async function generateMetadata({
   params,
 }: NoteDetailsProps): Promise<Metadata> {
   const { id } = await params;
-  const note = await fetchNoteById(Number(id));
+  const note = await fetchNoteById(id);
 
   const title = note?.title || 'Note not found';
 
@@ -53,7 +53,7 @@ const NoteDetails = async ({ params }: NoteDetailsProps) => {
 
   await queryClient.prefetchQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(Number(id)),
+    queryFn: () => fetchNoteById(id),
   });
 
   return (
