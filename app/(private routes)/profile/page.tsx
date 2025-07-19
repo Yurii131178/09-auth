@@ -32,7 +32,7 @@ const Profile = () => {
         </div>
         <div className={css.avatarWrapper}>
           <img
-            src="/user-profile-icon.jpg"
+            src="/blue-avatar.jpg"
             alt="User Avatar"
             width={240}
             height={240}
