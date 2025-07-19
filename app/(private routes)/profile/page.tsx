@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import css from './ProfilePage.module.css';
 import { Metadata } from 'next';
+import Image from 'next/image';
+import { getServerUser } from '@/lib/api/serverApi';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -20,7 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
-const Profile = () => {
+const Profile = async () => {
+  const user = await getServerUser();
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -31,11 +34,18 @@ const Profile = () => {
           </Link>
         </div>
         <div className={css.avatarWrapper}>
-          <img
+          {/* <Image
             src="/blue-avatar.jpg"
             alt="User Avatar"
             width={240}
             height={240}
+            className={css.avatar}
+          /> */}
+          <Image
+            src={user?.avatar || '/7236095.png'}
+            alt="User Avatar"
+            width={120}
+            height={120}
             className={css.avatar}
           />
         </div>
