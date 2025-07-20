@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: 'NoteHub - Your Ultimate Note-Taking Assistant',
     description:
       'Manage your notes effortlessly with NoteHub. Create, organize by categories, and enhance productivity',
-    url: 'https://08-zustand-theta.vercel.app/notes/action/create',
+    url: 'https://09-auth-neon.vercel.app/',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',

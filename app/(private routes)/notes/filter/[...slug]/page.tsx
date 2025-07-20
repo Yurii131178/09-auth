@@ -25,7 +25,7 @@ export const generateMetadata = async ({
       title,
       description,
 
-      url: `#/${tag}`, // enter my vercel url after deploy
+      url: `https://09-auth-neon..app//${tag}`,
       siteName: 'NoteHub',
       images: [
         {
