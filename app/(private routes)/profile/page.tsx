@@ -16,7 +16,7 @@ export const metadata: Metadata = {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
         width: 1200,
         height: 630,
-        alt: 'NoteHub 404',
+        alt: 'NoteHub notebook icon and logo',
       },
     ],
   },
@@ -34,15 +34,8 @@ const Profile = async () => {
           </Link>
         </div>
         <div className={css.avatarWrapper}>
-          {/* <Image
-            src="/blue-avatar.jpg"
-            alt="User Avatar"
-            width={240}
-            height={240}
-            className={css.avatar}
-          /> */}
           <Image
-            src={user?.avatar || '/7236095.png'}
+            src={user?.avatar || '/public/blue-avatar.jpg'}
             alt="User Avatar"
             width={120}
             height={120}
@@ -50,8 +43,8 @@ const Profile = async () => {
           />
         </div>
         <div className={css.profileInfo}>
-          <p>Username: your_username</p>
-          <p>Email: your_email@example.com</p>
+          <p>Username: {user.username} </p>
+          <p>Email: {user.email} </p>
         </div>
       </div>
     </main>

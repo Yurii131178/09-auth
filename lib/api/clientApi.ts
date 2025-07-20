@@ -29,22 +29,40 @@ export interface AuthUserData {
 
 //GET------------------------------------------------------------------
 
-export async function fetchNotes(
-  query: string,
-  page: number,
-  tag: string | undefined = undefined,
-): Promise<FetchNotesResponse> {
-  const params: FetchNotesParams = {
-    ...(query.trim() !== '' && { search: query.trim() }),
-    page: page,
-    perPage: 12,
-    tag,
-  };
+// export async function fetchNotes(
+//   query: string,
+//   page: number,
+//   tag: string | undefined = undefined,
+// ): Promise<FetchNotesResponse> {
+//   const params: FetchNotesParams = {
+//     ...(query.trim() !== '' && { search: query.trim() }),
+//     page: page,
+//     perPage: 12,
+//     tag,
+//   };
 
-  const response = await nextServer.get<FetchNotesResponse>('/notes', {
+//   const response = await nextServer.get<FetchNotesResponse>('/notes', {
+//     params,
+//   });
+//   return response.data;
+// }
+//////////////////////
+export async function fetchNotes(
+  search: string,
+  page: number,
+  tag?: string,
+): Promise<FetchNotesResponse> {
+  const perPage = 12;
+  const params: FetchNotesParams = { page, perPage };
+
+  if (search) params.search = search;
+  if (tag) params.tag = tag;
+
+  const res = await nextServer.get<FetchNotesResponse>('/notes', {
     params,
   });
-  return response.data;
+
+  return res.data;
 }
 
 //GET NOTE BY ID

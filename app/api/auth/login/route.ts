@@ -6,8 +6,8 @@ import { isAxiosError } from 'axios';
 import { logErrorResponse } from '../../_utils/utils';
 
 export async function POST(req: NextRequest) {
+  const body = await req.json();
   try {
-    const body = await req.json();
     const apiRes = await api.post('auth/login', body);
 
     const cookieStore = await cookies();
@@ -22,8 +22,10 @@ export async function POST(req: NextRequest) {
           path: parsed.Path,
           maxAge: Number(parsed['Max-Age']),
         };
-        if (parsed.accessToken) cookieStore.set('accessToken', parsed.accessToken, options);
-        if (parsed.refreshToken) cookieStore.set('refreshToken', parsed.refreshToken, options);
+        if (parsed.accessToken)
+          cookieStore.set('accessToken', parsed.accessToken, options);
+        if (parsed.refreshToken)
+          cookieStore.set('refreshToken', parsed.refreshToken, options);
       }
 
       return NextResponse.json(apiRes.data, { status: apiRes.status });
@@ -35,10 +37,13 @@ export async function POST(req: NextRequest) {
       logErrorResponse(error.response?.data);
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
-        { status: error.status }
+        { status: error.status },
       );
     }
     logErrorResponse({ message: (error as Error).message });
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    );
   }
 }
