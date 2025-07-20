@@ -44,10 +44,10 @@ const EditProfile = () => {
         <h1 className={css.formTitle}>Edit Profile</h1>
 
         <Image
-          src={user?.avatar || '/user-profile-icon.jpg'}
+          src={user?.avatar || '/ava.png'}
           alt="User Avatar"
-          width={120}
-          height={120}
+          width={240}
+          height={240}
           className={css.avatar}
         />
 
